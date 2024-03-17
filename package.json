@@ -87,12 +87,15 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
-    "compile": "tsc -b",
+    "vscode:prepublish": "pnpm run build",
+    "build-server": "cd server && cargo build --release",
+    "copy-server": "cp server/target/release/server ../client/pseudoserver",
+    "build": "vsce package",
+    "prepublish": "pnpm run build && pnpm run build-server && pnpm run copy-server",
     "watch": "tsc -b -w",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
-    "postinstall": "cd client && pnpm i && cd ../server && pnpm i && cd ..",
+    "postinstall": "cd client && pnpm i &&  cd ..",
     "test": "sh ./scripts/e2e.sh"
   },
   "devDependencies": {
@@ -105,5 +108,9 @@
     "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.56.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^2.24.0",
+    "vsce": "^2.15.0"
   }
 }
