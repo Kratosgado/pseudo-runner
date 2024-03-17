@@ -88,8 +88,8 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run build",
-    "build-server": "cd server && cargo build --release",
-    "copy-server": "cp server/target/release/server ../client/pseudoserver",
+    "build-server": "cd server && cargo build --release && pnpm run copy-server && cd .. && sudo chmod -R 777 client/src/server",
+    "copy-server": "cp -rf ./target/release/server ../client/src/server",
     "build": "vsce package",
     "prepublish": "pnpm run build && pnpm run build-server && pnpm run copy-server",
     "watch": "tsc -b -w",

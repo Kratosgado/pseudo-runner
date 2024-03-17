@@ -1,0 +1,11 @@
+/home/kratosgado/projects/typescript/pseudo-runner/server/target/release/deps/libsocket2-a9f1bbc23020ace3.rmeta: /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/lib.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockaddr.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/socket.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockref.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sys/unix.rs
+
+/home/kratosgado/projects/typescript/pseudo-runner/server/target/release/deps/libsocket2-a9f1bbc23020ace3.rlib: /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/lib.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockaddr.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/socket.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockref.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sys/unix.rs
+
+/home/kratosgado/projects/typescript/pseudo-runner/server/target/release/deps/socket2-a9f1bbc23020ace3.d: /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/lib.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockaddr.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/socket.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockref.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sys/unix.rs
+
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/lib.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockaddr.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/socket.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sockref.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/socket2-0.5.6/src/sys/unix.rs:

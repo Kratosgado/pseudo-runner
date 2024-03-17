@@ -7,16 +7,27 @@ import { LanguageClientOptions, LanguageClient, ServerOptions, TransportKind } f
 let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
-	// the server is implemented in node
-	const serverModule = context.asAbsolutePath(
-		path.join('server', 'out', 'server.js')
-	);
+	// load the rust tower_lsp server
+	// const serverModule = context.asAbsolutePath(
+	// 	path.join("client", "server")
+	// );
 
 	// if the extension is launched in debug mode then the debug server options are used
 	// otherwise the run options are used
 	const serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.ipc },
-		debug: { module: serverModule, transport: TransportKind.ipc },
+		// command: path.join(__dirname, "server"),
+		// args: [],
+		// transport: TransportKind.stdio,
+		run: {
+			command: path.join(__dirname, "server"),
+			args: [],
+			transport: TransportKind.stdio,
+		},
+		debug: {
+			command: path.join(__dirname, "server"),
+			args: [],
+			transport: TransportKind.stdio
+		},
 	};
 
 	const clientOptions: LanguageClientOptions = {
