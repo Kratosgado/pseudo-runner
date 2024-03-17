@@ -1,18 +1,44 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+
 import * as vscode from 'vscode';
+import * as path from "path";
+import { workspace, ExtensionContext } from 'vscode';
+import { LanguageClientOptions, LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let client: LanguageClient;
+
 export function activate(context: vscode.ExtensionContext) {
+	// the server is implemented in node
+	const serverModule = context.asAbsolutePath(
+		path.join('server', 'out', 'server.js')
+	);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "pseudo-runner" is now active!');
+	// if the extension is launched in debug mode then the debug server options are used
+	// otherwise the run options are used
+	const serverOptions: ServerOptions = {
+		run: { module: serverModule, transport: TransportKind.ipc },
+		debug: { module: serverModule, transport: TransportKind.ipc },
+	};
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
+	const clientOptions: LanguageClientOptions = {
+		// register the server for plain text documents
+		documentSelector: [{ scheme: 'file', language: 'pseudo' }],
+		synchronize: {
+			// notify the server about file changes to '.clientrc files contained in the workspace
+			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+		}
+	};
+
+	// create the language client and start the client
+	client = new LanguageClient(
+		'pseudoRunner',
+		'Pseudo Runner',
+		serverOptions,
+		clientOptions
+	);
+
+	// start the client. This will also launch the server
+	client.start();
+
 	let disposable = vscode.commands.registerCommand('pseudo-runner.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
@@ -23,4 +49,9 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate(): Thenable<void> | undefined {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
+}

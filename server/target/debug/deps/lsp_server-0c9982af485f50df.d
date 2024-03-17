@@ -1,0 +1,10 @@
+/home/kratosgado/projects/typescript/pseudo-runner/server/target/debug/deps/liblsp_server-0c9982af485f50df.rmeta: /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/lib.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/msg.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/stdio.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/error.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/socket.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/req_queue.rs
+
+/home/kratosgado/projects/typescript/pseudo-runner/server/target/debug/deps/lsp_server-0c9982af485f50df.d: /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/lib.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/msg.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/stdio.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/error.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/socket.rs /home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/req_queue.rs
+
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/lib.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/msg.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/stdio.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/error.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/socket.rs:
+/home/kratosgado/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lsp-server-0.7.6/src/req_queue.rs:
