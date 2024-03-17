@@ -1,6 +1,6 @@
 {
-    "name": "pseudo-runner-server",
-    "description": "Implementation of pseudocode language server in node",
+    "name": "pseudo-runner-client",
+    "description": "client part of pseudocode language server",
     "version": "1.0.0",
     "author": {
         "email": "mbeahessilfieprince@gmail.com",
@@ -9,7 +9,7 @@
     },
     "license": "MIT",
     "engines": {
-        "node": "*"
+        "vscode": "^1.87.0"
     },
     "repository": {
         "type": "git",
@@ -17,7 +17,10 @@
     },
     "scripts": {},
     "dependencies": {
-        "vscode-languageserver": "^9.0.1",
-        "vscode-languageserver-textdocument": "^1.0.11"
+        "vscode-languageclient": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.87.0",
+        "@vscode/test-electron": "^2.3.9"
     }
 }

@@ -2,7 +2,11 @@
   "name": "pseudo-runner",
   "displayName": "pseudo runner",
   "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kratosgado/pseudo-runner"
+  },
   "engines": {
     "vscode": "^1.87.0"
   },
@@ -23,7 +27,7 @@
     "Other",
     "Formatters"
   ],
-  "main": "./out/extension.js",
+  "main": "./client/out/extension",
   "contributes": {
     "commands": [
       {
@@ -84,8 +88,8 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
-    "compile": "tsc -p",
-    "watch": "tsc -watch -p",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
     "postinstall": "cd client && pnpm i && cd ../server && pnpm i && cd ..",
