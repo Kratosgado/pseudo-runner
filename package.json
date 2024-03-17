@@ -7,10 +7,21 @@
     "vscode": "^1.87.0"
   },
   "keywords": [
-    "pseudo","code","runner","intellisense","syntax","highlighting", "multi-root ready"
+    "pseudo",
+    "code",
+    "runner",
+    "intellisense",
+    "syntax",
+    "highlighting",
+    "multi-root ready"
   ],
   "categories": [
-    "Programming Languages","Snippets", "Debuggers", "Education", "Other", "Formatters"
+    "Programming Languages",
+    "Snippets",
+    "Debuggers",
+    "Education",
+    "Other",
+    "Formatters"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -23,8 +34,14 @@
     "languages": [
       {
         "id": "pseudo",
-        "extensions": [".ps",".pseudo"],
-        "aliases": ["pseudocode",  "pseudo"],
+        "extensions": [
+          ".ps",
+          ".pseudo"
+        ],
+        "aliases": [
+          "pseudocode",
+          "pseudo"
+        ],
         "configuration": "./language-configuration.json"
       }
     ],
@@ -47,7 +64,11 @@
         "pseudo-runner.trace.server": {
           "type": "string",
           "scope": "window",
-          "enum": ["off", "messages", "verbose"],
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
           "default": "off",
           "description": "Traces the communication between VS Code and the pseudo language server."
         }
@@ -71,14 +92,14 @@
     "test": "sh ./scripts/e2e.sh"
   },
   "devDependencies": {
-    "@types/vscode": "^1.87.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.87.0",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
     "@vscode/test-cli": "^0.0.6",
-    "@vscode/test-electron": "^2.3.9"
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
   }
 }
