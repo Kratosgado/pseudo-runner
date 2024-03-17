@@ -1,0 +1,57 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "pseudocode",
+	"patterns": [
+		{"include": "#keywords"},
+		{"include": "#expression"},
+		{"include": "#variables"},
+		{"include": "#strings"},
+		{"include": "#operator"}
+	],
+	"repository": {
+		"variables": {
+			"name": "variable",
+			"patterns": [
+				{
+					"name": "variable.name",
+					"begin": "",
+					"end": "( )",
+					"applyEndPatternLast": 0,
+					"match": "(hello)"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+				"name": "keyword.control",
+				"match": "\\b(if|IF|while|WHILE|return|RETURN|for|FOR|TO|to|DO|do|STEP|step|endif|ENDIF|endfor|ENDFOR|endwhile|ENDWHILE)\\b"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\b(PRINT|OUTPUT|DISPLAY|GET|RECEIVE|INPUT|print|output|display|get|receive|input)\\b"
+				},
+				{
+					"name": "entity.name.tag",
+					"match": "\\b(FUNCTION|ENDFUNCTION|function|endfunction)\\b"
+				},
+				{
+					"name": "keyword.operator.new",
+					"match": "(<|>|<=|>=|=|==)"
+				}
+		]
+		},
+		"strings": {
+			"name": "string.quoted.double.pseudo",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.pseudo",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "text.ps"
+}

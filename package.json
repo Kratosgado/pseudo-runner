@@ -1,0 +1,83 @@
+{
+  "name": "pseudo-runner",
+  "displayName": "pseudo runner",
+  "description": "Pseudocode langugage support, intellisense and syntax higlighting",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "keywords": [
+    "pseudo","code","runner","intellisense","syntax","highlighting", "multi-root ready"
+  ],
+  "categories": [
+    "Programming Languages","Snippets", "Debuggers", "Education", "Other", "Formatters"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pseudo-runner.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "languages": [
+      {
+        "id": "pseudo",
+        "extensions": [".ps",".pseudo"],
+        "aliases": ["pseudocode",  "pseudo"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Pseudo Runner",
+      "properties": {
+        "pseudo-runner.maxNumberOfProblems": {
+          "type": "number",
+          "default": 100,
+          "scope": "resource",
+          "description": "Maximum number of problems to show in the Problems panel."
+        },
+        "pseudo-runner.enable": {
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "Enable/disable this extension."
+        },
+        "pseudo-runner.trace.server": {
+          "type": "string",
+          "scope": "window",
+          "enum": ["off", "messages", "verbose"],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the pseudo language server."
+        }
+      }
+    },
+    "grammars": [
+      {
+        "language": "pseudo",
+        "scopeName": "text.ps",
+        "path": "./syntaxes/pseudo.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.87.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9"
+  }
+}
