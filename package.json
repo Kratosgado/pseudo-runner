@@ -53,19 +53,19 @@
       "type": "object",
       "title": "Pseudo Runner",
       "properties": {
-        "pseudo-runner.maxNumberOfProblems": {
+        "pseudoRunner.maxNumberOfProblems": {
           "type": "number",
           "default": 100,
           "scope": "resource",
           "description": "Maximum number of problems to show in the Problems panel."
         },
-        "pseudo-runner.enable": {
+        "pseudoRunner.enable": {
           "type": "boolean",
           "scope": "resource",
           "default": true,
           "description": "Enable/disable this extension."
         },
-        "pseudo-runner.trace.server": {
+        "pseudoRunner.trace.server": {
           "type": "string",
           "scope": "window",
           "enum": [
