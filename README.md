@@ -1,71 +1,46 @@
-# pseudo-runner README
+# Pseudo Runner
 
-This is the README for your extension "pseudo-runner". After writing up a brief description, we recommend including the following sections.
+**Version:** 1.0.0  
+**Publisher:** KratosGado  
+**Author:** Prince Mbeah Essilfie  
+**Email:** [mbeahessilfieprince@gmail.com](mailto:mbeahessilfieprince@gmail.com)  
+**GitHub:** [Kratosgado](https://github.com/Kratosgado)  
+**Description:** Pseudocode language support with IntelliSense and syntax highlighting for Visual Studio Code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Supports syntax highlighting and IntelliSense for the pseudo programming language.
+- Provides a command to run pseudo code directly within Visual Studio Code.
+- Debugging support for pseudo code.
+- Multi-root ready for seamless integration with multi-folder workspace setups.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+You can install the Pseudo Runner extension directly from the Visual Studio Code Marketplace or by searching for "Pseudo Runner" in the Extensions view within Visual Studio Code.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
 
-## Requirements
+Once installed, the extension automatically detects files with `.ps` or `.pseudo` extensions and provides syntax highlighting and IntelliSense for the pseudo programming language. You can run pseudo code directly within Visual Studio Code using the provided command or debug your pseudo code with the built-in debugger.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Configuration
 
-## Extension Settings
+The extension provides several configuration options:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- **Maximum Number of Problems:** Set the maximum number of problems to show in the Problems panel.
+- **Enable/Disable Extension:** Toggle the extension on or off.
+- **Trace Server Communication:** Trace the communication between VS Code and the pseudo language server.
 
-For example:
+## Contributing
 
-This extension contributes the following settings:
+If you encounter any issues or have suggestions for improvements, please feel free to contribute to the [Pseudo Runner GitHub repository](https://github.com/Kratosgado/pseudo-runner).
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## License
 
-## Known Issues
+This extension is licensed under the MIT License. See the [LICENSE](https://github.com/Kratosgado/pseudo-runner/blob/main/LICENSE) file for more details.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## Contact
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- Email: [mbeahessilfieprince@gmail.com](mailto:mbeahessilfieprince@gmail.com)
+- GitHub: [Kratosgado](https://github.com/Kratosgado)
+- LinkedIn: [Prince Mbeah Essilfie](https://www.linkedin.com/in/prince-mbeah-essilfie-6bb0b5231)
+- Twitter: [MbeahEssilfie](https://twitter.com/MbeahEssilfie)
