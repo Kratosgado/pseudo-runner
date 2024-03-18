@@ -4,20 +4,35 @@
 	"patterns": [
 		{"include": "#keywords"},
 		{"include": "#expression"},
-		{"include": "#variables"},
+		{"include": "#functions"},
+		{"include": "#numbers"},
 		{"include": "#strings"},
-		{"include": "#operator"}
+		{"include": "#variables"},
+		{"include": "#comments"}
+
 	],
 	"repository": {
-		"variables": {
-			"name": "variable",
+		"functions":{
 			"patterns": [
 				{
-					"name": "variable.name",
-					"begin": "",
-					"end": "( )",
-					"applyEndPatternLast": 0,
-					"match": "(hello)"
+					"name": "entity.name.function",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b(?=\\()"
+				},
+				{
+					"name": "variable.parameter",
+					"match": "(?<=\\()[^\\)]+(?=\\))"
+				}
+			]
+		},
+		"numbers": {
+    "name": "constant.numeric",
+    "match": "\\b\\d+\\b"
+},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
 				}
 			]
 		},
@@ -33,7 +48,7 @@
 				},
 				{
 					"name": "entity.name.tag",
-					"match": "\\b(FUNCTION|ENDFUNCTION|function|endfunction)\\b"
+					"match": "\\b(FUNCTION|ENDFUNCTION|TRUE|FALSE|function|endfunction|true|false)\\b"
 				},
 				{
 					"name": "keyword.operator.new",
