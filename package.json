@@ -126,8 +126,8 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run build",
-    "build-server": "cd server && cargo build --release && pnpm run copy-server && cd .. && sudo chmod -R 777 client/src/server",
-    "copy-server": "cp -rf ./target/release/server ../client/src/server",
+    "build-server": "cd server && cargo build --release && cd .. && pnpm run copy-server && sudo chmod -R 777 client/src/out/server",
+    "copy-server": "cp -rf ./server/target/release/server ./client/src/out/",
     "build": "vsce package",
     "prepublish": "pnpm run build && pnpm run build-server && pnpm run copy-server",
     "watch": "tsc -b -w",

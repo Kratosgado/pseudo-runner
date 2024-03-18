@@ -9,7 +9,6 @@
 		{"include": "#strings"},
 		{"include": "#variables"},
 		{"include": "#comments"}
-
 	],
 	"repository": {
 		"functions":{
