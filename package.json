@@ -33,13 +33,16 @@
     "Other",
     "Formatters"
   ],
+  "activationEvents": [
+    "onLanguage:pseudo"
+  ],
   "main": "./client/out/extension",
   "contributes": {
     "keybindings": {
-        "command": "pseudo-runner.runPseudo",
-        "title": "run pseudo code",
-        "key": "f5",
-        "when": "editorTextFocus && !editorReadonly || editorLangId == pseudo"
+      "command": "pseudo-runner.runPseudo",
+      "title": "run pseudo code",
+      "key": "f5",
+      "when": "editorTextFocus && !editorReadonly || editorLangId == pseudo"
     },
     "commands": [
       {
@@ -125,30 +128,23 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run build",
-    "build-server": "cd server && cargo build --release && cd .. && pnpm run copy-server && sudo chmod -R 777 client/src/out/server",
-    "copy-server": "cp -rf ./server/target/release/server ./client/src/out/",
-    "build": "vsce package",
-    "prepublish": "pnpm run build && pnpm run build-server && pnpm run copy-server",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./client && tsc -p ./",
     "watch": "tsc -b -w",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
-    "postinstall": "cd client && pnpm i &&  cd ..",
+    "postinstall": "cd client && npm i &&  cd ..",
     "test": "sh ./scripts/e2e.sh"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
-    "@types/node": "18.x",
+    "@types/node": "~18.19.25",
     "@types/vscode": "^1.87.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "@vscode/test-cli": "^0.0.6",
     "@vscode/test-electron": "^2.3.9",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "@vscode/vsce": "^2.24.0",
-    "vsce": "^2.15.0"
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.2"
   }
 }

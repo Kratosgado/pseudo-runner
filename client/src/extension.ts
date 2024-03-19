@@ -1,11 +1,11 @@
 
-import * as vscode from 'vscode';
-import * as path from "path";
-import { workspace, ExtensionContext } from 'vscode';
-import { LanguageClientOptions, LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node';
-import {runPseudo } from './runPseudo';
+import * as vscode from "vscode";
+// import * as path from "path";
+// import { workspace, ExtensionContext } from 'vscode';
+// import { LanguageClientOptions, LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node';
+import { runPseudo } from './runPseudo';
 
-let client: LanguageClient;
+// let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
 	// if the extension is launched in debug mode then the debug server options are used
@@ -46,11 +46,14 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('pseudoRunner.runPseudo', runPseudo));
 
 }
+export function deactivate() {
 
-// This method is called when your extension is deactivated
-export function deactivate(): Thenable<void> | undefined {
-	if (!client) {
-		return undefined;
-	}
-	return client.stop();
 }
+
+// // This method is called when your extension is deactivated
+// export function deactivate(): Thenable<void> | undefined {
+// 	if (!client) {
+// 		return undefined;
+// 	}
+// 	return client.stop();
+// }
