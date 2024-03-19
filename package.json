@@ -2,7 +2,7 @@
   "name": "pseudo-runner",
   "displayName": "pseudo runner",
   "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "KratosGado",
   "icon": "images/icon.png",
   "author": {
@@ -34,8 +34,7 @@
     "Other",
     "Formatters"
   ],
-  "activationEvents": [
-  ],
+  "activationEvents": [],
   "main": "./dist/extension",
   "contributes": {
     "keybindings": {
