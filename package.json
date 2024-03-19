@@ -2,8 +2,9 @@
   "name": "pseudo-runner",
   "displayName": "pseudo runner",
   "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "KratosGado",
+  "icon": "images/icon.png",
   "author": {
     "name": "Prince Mbeah Essilfie",
     "email": "mbeahessilfieprince@gmail.com",
