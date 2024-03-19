@@ -17,6 +17,7 @@ export const runPseudo = async () => {
         } else {
             // else create a new terminal with the name "NASM Terminal" and send the execCommand
             const terminal = vscode.window.createTerminal('Pseudo Runner');
+            terminal.sendText(`${path.join(__dirname, "pseudo_interpreter")} ${fileName}`);
             terminal.show();
         }
     }

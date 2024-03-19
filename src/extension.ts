@@ -1,10 +1,10 @@
 
-import * as vscode from "vscode";
 // import * as path from "path";
 // import { workspace, ExtensionContext } from 'vscode';
 // import { LanguageClientOptions, LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node';
-import { runPseudo } from './runPseudo';
 
+import * as vscode from 'vscode';
+import { runPseudo } from './runPseudo';
 // let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
