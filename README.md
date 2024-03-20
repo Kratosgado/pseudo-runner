@@ -1,6 +1,5 @@
 # Pseudo Runner
 
-**Version:** 1.0.0  
 **Publisher:** KratosGado  
 **Author:** Prince Mbeah Essilfie  
 **Email:** [mbeahessilfieprince@gmail.com](mailto:mbeahessilfieprince@gmail.com)  
@@ -34,6 +33,7 @@ output add(1, 2)
 
 ## Features
 
+- Supports linux, testing on windows.
 - Supports syntax highlighting and IntelliSense for the pseudo programming language.
 - Provides a command to run pseudo code directly within Visual Studio Code.
 - Debugging support for pseudo code.
