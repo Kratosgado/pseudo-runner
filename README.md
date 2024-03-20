@@ -7,6 +7,31 @@
 **GitHub:** [Kratosgado](https://github.com/Kratosgado)  
 **Description:** Pseudocode language support with IntelliSense and syntax highlighting for Visual Studio Code.
 
+```
+x = 5
+if x == 5 then
+    output x
+else
+    output 0
+endif
+SIZE = 3
+array[SIZE]
+for i = 0 to SIZE - 1 step 1 do
+    array[i] = i
+endfor
+while x > 0 do
+    display x
+    x = x - 1
+endwhile
+for i = 0 to SIZE - 1 do
+    output array[i]
+endfor
+function add(a, b)
+    return a + b
+endfunction
+output add(1, 2)
+```
+
 ## Features
 
 - Supports syntax highlighting and IntelliSense for the pseudo programming language.
