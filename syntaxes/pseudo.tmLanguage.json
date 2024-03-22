@@ -55,6 +55,11 @@
 				}
 		]
 		},
+		"comments": {
+			"name": "comment",
+			"begin": "#",
+			"end": "\n"
+		},
 		"strings": {
 			"name": "string.quoted.double.pseudo",
 			"begin": "\"",
