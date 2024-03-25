@@ -9,18 +9,19 @@ import { runPseudo } from './runPseudo';
 let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
+
+	// the server is implemented in node
+	const serverModule = context.asAbsolutePath(path.join('dist', 'server', 'server.js'));
 	// if the extension is launched in debug mode then the debug server options are used
 	// otherwise the run options are used
 	const serverOptions: ServerOptions = {
 		run: {
-			command: path.join(__dirname, "pseudo_lsp"),
-			args: [],
-			transport: TransportKind.stdio,
+			module: serverModule,
+			transport: TransportKind.ipc,
 		},
 		debug: {
-			command: path.join(__dirname, "pseudo_lsp"),
-			args: [],
-			transport: TransportKind.stdio
+			module: serverModule,
+			transport: TransportKind.ipc,
 		},
 	};
 	const clientOptions: LanguageClientOptions = {
@@ -47,14 +48,11 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('pseudoRunner.runPseudo', runPseudo));
 
 }
-export function deactivate() {
 
+// This method is called when your extension is deactivated
+export function deactivate(): Thenable<void> | undefined {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
 }
-
-// // This method is called when your extension is deactivated
-// export function deactivate(): Thenable<void> | undefined {
-// 	if (!client) {
-// 		return undefined;
-// 	}
-// 	return client.stop();
-// }

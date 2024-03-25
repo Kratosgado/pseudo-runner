@@ -39,7 +39,7 @@
 			"patterns": [
 				{
 				"name": "keyword.control",
-				"match": "\\b(if|IF|while|then|DECLARE|AS|INTEGER|DOUBLE|STRING|declare|as|integer|double|string|THEN|WHILE|return|RETURN|for|FOR|TO|to|DO|do|STEP|step|endif|ENDIF|endfor|ENDFOR|endwhile|ENDWHILE)\\b"
+				"match": "\\b(if|IF|while|then|DECLARE|AS|INTEGER|DOUBLE|STRING|declare|as|integer|double|string|THEN|WHILE|return|RETURN|for|FOR|TO|to|DO|do|STEP|step|else|ELSE|endif|ENDIF|endfor|ENDFOR|endwhile|ENDWHILE)\\b"
 				},
 				{
 					"name": "entity.name.function",

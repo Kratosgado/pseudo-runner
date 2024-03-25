@@ -71,7 +71,7 @@
       {
         "type": "pseudo",
         "label": "Pseudo",
-        "program": "./client/out/server",
+        "program": "./dist/server",
         "runtime": "executable"
       }
     ],
@@ -128,14 +128,17 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "compile": "webpack",
+    "compile": "npm run build-server && webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "build": "npm run build-lang && npm run build-server",
+    "build-server": "tsc src/server/*.ts && mv src/server/*.js dist/server/",
+    "build-lang": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
@@ -152,6 +155,8 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "vscode-languageclient": "^9.0.1"
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.11"
   }
 }
