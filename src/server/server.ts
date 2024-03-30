@@ -19,24 +19,21 @@ import {
     TextDocument
 } from 'vscode-languageserver-textdocument';
 import { KEYWORDS } from './keywords';
-import { Position } from 'vscode';
+import { validateDeclare, validateForLoop, validateWhile } from './validators/declare';
+import { validateAssignment } from './validators/assignment';
 
-// Create a connection for the server, using Node's IPC as a transport.
-// Also include all preview / proposed LSP features.
+
 const connection = createConnection(ProposedFeatures.all);
 
 // Create a simple text document manager.
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability = false;
-// let hasWorkspaceFolderCapability = false;
 let hasDiagnosticRelatedInformationCapability = false;
 
 connection.onInitialize((params: InitializeParams) => {
     const capabilities = params.capabilities;
 
-    // Does the client support the `workspace/configuration` request?
-    // If not, we fall back using global settings.
     hasConfigurationCapability = !!(
         capabilities.workspace && !!capabilities.workspace.configuration
     );
@@ -68,15 +65,9 @@ connection.onInitialized(() => {
         connection.client.register(DidChangeConfigurationNotification.type, undefined);
     }
 });
-
-// The example settings
 interface PseudoSettings {
     maxNumberOfProblems: number;
 }
-
-// The global settings, used when the `workspace/configuration` request is not supported by the client.
-// Please note that this is not the case when using this server with the client provided in this example
-// but could happen with other clients.
 const defaultSettings: PseudoSettings = { maxNumberOfProblems: 100 };
 let globalSettings: PseudoSettings = defaultSettings;
 
@@ -92,9 +83,6 @@ connection.onDidChangeConfiguration(change => {
             (change.settings.pseudoRunner || defaultSettings)
         );
     }
-    // Refresh the diagnostics since the `maxNumberOfProblems` could have changed.
-    // We could optimize things here and re-fetch the setting first can compare it
-    // to the existing setting, but this is out of scope for this example.
     connection.languages.diagnostics.refresh();
 });
 
@@ -127,8 +115,6 @@ connection.languages.diagnostics.on(async (params) => {
             items: await validateTextDocument(document)
         } satisfies DocumentDiagnosticReport;
     } else {
-        // We don't know the document. We can either try to read it from disk
-        // or we don't report problems for it.
         return {
             kind: DocumentDiagnosticReportKind.Full,
             items: []
@@ -136,8 +122,6 @@ connection.languages.diagnostics.on(async (params) => {
     }
 });
 
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
 documents.onDidChangeContent(change => {
     validateTextDocument(change.document);
 });
@@ -146,9 +130,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
     // In this simple example we get the settings for every validate run.
     const settings = await getDocumentSettings(textDocument.uri);
 
-    // The validator creates diagnostics for all uppercase words length 2 and more
     const text = textDocument.getText();
-    const pattern = /\b[A-Z]{2,}\b/g;
     let m: RegExpExecArray | null;
 
     const lines = text.split(/\r?\n/);
@@ -156,7 +138,28 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
     const diagnostics: Diagnostic[] = [];
     lines.map((line, i) => {
         if (line.trim().toLowerCase().startsWith("declare")) {
-            validateDeclare(textDocument, line, i).then((diagnostic) => {
+            validateDeclare(line, i).then((diagnostic) => {
+                if (diagnostic) {
+                    diagnostics.push(diagnostic);
+                }
+            });
+        }
+        if (line.trim().toLowerCase().match(/[A-Za-z_]+\s+=/)) {
+            validateAssignment(line, i).then((diagnostic) => {
+                if (diagnostic) {
+                    diagnostics.push(diagnostic);
+                }
+            });
+        }
+        if (line.trim().toLowerCase().startsWith("while")) {
+            validateWhile(line, i).then((diagnostic) => {
+                if (diagnostic) {
+                    diagnostics.push(diagnostic);
+                }
+            });
+        }
+        if (line.trim().toLowerCase().startsWith("for")) {
+            validateForLoop(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
                 }
@@ -164,22 +167,16 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
         }
     });
 
-    diagnostics.push((await validateForLoop(lines))[0]);
-
     return diagnostics;
 }
 
 connection.onDidChangeWatchedFiles(_change => {
-    // Monitored files have change in VSCode
     connection.console.log('We received a file change event');
 });
 
-// This handler provides the initial list of the completion items.
 connection.onCompletion(
     (_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-        // The pass parameter contains the position of the text document in
-        // which code complete got requested. For the example we ignore this
-        // info and always provide the same completion items.
+
         let completions: CompletionItem[] = KEYWORDS.map((keyword) => {
             return {
                 label: keyword.toUpperCase(),
@@ -191,8 +188,6 @@ connection.onCompletion(
     }
 );
 
-// This handler resolves additional information for the item selected in
-// the completion list.
 connection.onCompletionResolve(
     (item: CompletionItem): CompletionItem => {
         if (item.data === 1) {
@@ -205,69 +200,7 @@ connection.onCompletionResolve(
         return item;
     }
 );
-
-// Make the text document manager listen on the connection
-// for open, change and close text document events
 documents.listen(connection);
-
-// Listen on the connection
 connection.listen();
 
-async function validateForLoop(lines: string[]): Promise<Diagnostic[]> {
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        if (line.trim().toLowerCase().startsWith("for")) {
-            // Check for correct syntax: for <variable> = <start> to <end> step <stepsize> do
-            const match = line.toLowerCase().match(/for\s+(\w+)\s*=\s*(\d+)\s+to\s+(\d+)\s+step\s+(\d+)\s+do/i);
-            if (!match) {
-                return [{
-                    severity: DiagnosticSeverity.Error,
-                    range: {
-                        start: { line: i, character: 0 },
-                        end: { line: i, character: line.length }
-                    },
-                    message: "Syntax error in for loop",
-                    source: "pseudoRunner"
-                }];
-            }
-        }
-    }
-    return [];
-}
-
-async function validateDeclare(textDocument: TextDocument, line: string, i: number): Promise<Diagnostic | null> {
-    // Check for correct syntax: declare <variable> as <type>
-    const match = line.toLowerCase().match(/declare\s+(\w+)\s+as\s+(\w+)/i);
-    if (!match) {
-        return {
-            severity: DiagnosticSeverity.Error,
-            range: {
-                start: textDocument.positionAt(textDocument.offsetAt({ line: i, character: 0 }) + 7),
-                end: textDocument.positionAt(textDocument.offsetAt({ line: i, character: 0 }) + 7 + line.length)
-            },
-            message: `Invalid declare statement syntax at line ${i + 1}`
-        };
-    }
-    const [_, variable, datatype] = match;
-    if (variable === null || datatype === null) {
-        return {
-            severity: DiagnosticSeverity.Error,
-            range: {
-                start: textDocument.positionAt(i + 7),
-                end: textDocument.positionAt(i)
-            },
-            message: `Variable name required for declare statement at line ${i + 1}`
-        };
-    }
-    // if (!["INTEGER", "STRING", "DOUBLE"].includes(datatype.toUpperCase())) {
-    //     return {
-    //         severity: DiagnosticSeverity.Error,
-    //         range: {
-    //             start: new Position(i, datatype.length + 10),
-    //             end: new Position(i, datatype.length + 10),
-    //         },
-    //         message: `Invalid datatype "${datatype}" for declare statement at line ${i + 1}. Must be one of INTEGER, STRING, DOUBLE.`
-    //     };
-    // }
-    return null;
-}
+// function to validate while loops
