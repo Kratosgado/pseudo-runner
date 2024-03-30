@@ -137,8 +137,8 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "build": "npm run build-lang && npm run build-server",
-    "build-server": "tsc src/server/**.ts && mv src/server/*.js dist/server/ && mv src/server/validators/*.js dist/server/validators/",
-    "build-lang": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
+    "build-server": "tsc -b",
+    "build-lang": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter.exe ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",

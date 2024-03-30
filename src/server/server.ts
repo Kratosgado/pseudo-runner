@@ -136,6 +136,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
     const lines = text.split(/\r?\n/);
     let problems = 0;
     const diagnostics: Diagnostic[] = [];
+    const closingDiagnostics: Diagnostic[] = [];
     lines.map((line, i) => {
         if (line.trim().toLowerCase().startsWith("declare")) {
             validateDeclare(line, i).then((diagnostic) => {
@@ -145,6 +146,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
             });
         }
         if (line.trim().toLowerCase().match(/[A-Za-z_]+\s+=/)) {
+
             validateAssignment(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
@@ -152,13 +154,37 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
             });
         }
         if (line.trim().toLowerCase().startsWith("while")) {
+            // add debugger error for endwhile keyword
+            closingDiagnostics.push({
+                severity: DiagnosticSeverity.Error,
+                range: {
+                    start: { line: i, character: 0 },
+                    end: { line: i, character: line.length }
+                },
+                message: `expecting endwile for line: ${i + 1}`
+            });
             validateWhile(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
                 }
             });
         }
+        if (line.trim().toLowerCase().match("endwhile")) {
+            closingDiagnostics.pop();
+        }
+        if (line.trim().toLowerCase().match("endfor")) {
+            closingDiagnostics.pop();
+        }
         if (line.trim().toLowerCase().startsWith("for")) {
+            // add debugger error for endwhile keyword
+            closingDiagnostics.push({
+                severity: DiagnosticSeverity.Error,
+                range: {
+                    start: { line: i, character: 0 },
+                    end: { line: i, character: line.length }
+                },
+                message: `expecting endfor for line: ${i + 1}`
+            });
             validateForLoop(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
@@ -166,6 +192,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
             });
         }
     });
+    diagnostics.push(...closingDiagnostics);
 
     return diagnostics;
 }
