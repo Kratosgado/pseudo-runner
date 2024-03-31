@@ -171,6 +171,9 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
                 }
             });
         }
+        if (line.startsWith("function")) {
+            closingDiagnostics.push(expectEndKeyword(i, "endfunction"));
+        }
         
         // debug for end keywords
         if (line.match("endwhile")) {
@@ -180,6 +183,9 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
             closingDiagnostics.pop();
         }
         if (line.match("endif")) {
+            closingDiagnostics.pop();
+        }
+        if (line.match("endfunction")) {
             closingDiagnostics.pop();
         }
         if (line.startsWith("for")) {

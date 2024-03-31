@@ -1,5 +1,5 @@
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
-import { regWhile } from "./customRegex";
+import { regWhile, validateIdentifierSyntax } from "./customRegex";
 
 
 export async function validateWhile(line: string, i: number): Promise<Diagnostic | null> {
@@ -31,11 +31,4 @@ export async function validateWhile(line: string, i: number): Promise<Diagnostic
 
     // Return null if no issues were encountered during validation
     return null;
-}
-
-/**
- * Returns whether the given identifier matches the expected syntax for a valid variable name.
- */
-function validateIdentifierSyntax(identifier: string): boolean {
-    return /^[_A-Za-z][_\w]*$/.test(identifier);
 }
