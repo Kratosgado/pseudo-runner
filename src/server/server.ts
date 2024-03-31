@@ -155,36 +155,27 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
         }
         if (line.trim().toLowerCase().startsWith("while")) {
             // add debugger error for endwhile keyword
-            closingDiagnostics.push({
-                severity: DiagnosticSeverity.Error,
-                range: {
-                    start: { line: i, character: 0 },
-                    end: { line: i, character: line.length }
-                },
-                message: `expecting endwile for line: ${i + 1}`
-            });
+            closingDiagnostics.push(expectEndKeyword(i, "endwhile"));
             validateWhile(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
                 }
             });
         }
+        
+        // debug for end keywords
         if (line.trim().toLowerCase().match("endwhile")) {
             closingDiagnostics.pop();
         }
         if (line.trim().toLowerCase().match("endfor")) {
             closingDiagnostics.pop();
         }
+        if (line.trim().toLowerCase().match("endif")) {
+            closingDiagnostics.pop();
+        }
         if (line.trim().toLowerCase().startsWith("for")) {
             // add debugger error for endwhile keyword
-            closingDiagnostics.push({
-                severity: DiagnosticSeverity.Error,
-                range: {
-                    start: { line: i, character: 0 },
-                    end: { line: i, character: line.length }
-                },
-                message: `expecting endfor for line: ${i + 1}`
-            });
+            closingDiagnostics.push(expectEndKeyword(i, "endfor"));
             validateForLoop(line, i).then((diagnostic) => {
                 if (diagnostic) {
                     diagnostics.push(diagnostic);
@@ -231,3 +222,14 @@ documents.listen(connection);
 connection.listen();
 
 // function to validate while loops
+
+const expectEndKeyword = (lineNum: number, keyword: string): Diagnostic => {
+    return {
+        severity: DiagnosticSeverity.Error,
+        range: {
+            start: { line: lineNum, character: 0 },
+            end: { line: lineNum, character: keyword.length }
+        },
+        message: `expecting ${keyword} for line: ${lineNum + 1}`
+    };
+};
