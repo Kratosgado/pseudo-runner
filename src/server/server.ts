@@ -245,6 +245,6 @@ const expectEndKeyword = (lineNum: number, keyword: string): Diagnostic => {
             start: { line: lineNum, character: 0 },
             end: { line: lineNum, character: keyword.length }
         },
-        message: `expecting ${keyword} for line: ${lineNum + 1}`
+        message: `expecting keyword ${keyword} for line: ${lineNum + 1}`
     };
 };

@@ -7,6 +7,7 @@
 **Description:** Pseudocode language support with IntelliSense and syntax highlighting for Visual Studio Code.
 
 ```
+declare x as integer
 x = 5
 if x == 5 then
     output x
@@ -33,8 +34,8 @@ output add(1, 2)
 
 ## Features
 
-- Supports linux, testing on windows.
-- Supports syntax highlighting and IntelliSense for the pseudo programming language.
+- Supports linux, windows.
+- Supports syntax highlighting, diagnostics and IntelliSense for the pseudo programming language.
 - Provides a command to run pseudo code directly within Visual Studio Code.
 - Debugging support for pseudo code.
 - Multi-root ready for seamless integration with multi-folder workspace setups.
