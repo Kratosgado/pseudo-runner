@@ -8,7 +8,7 @@ import { runPseudo } from './runPseudo';
 
 let client: LanguageClient;
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
 
 	// the server is implemented in node
 	const serverModule = context.asAbsolutePath(path.join('dist', 'server', 'server.js'));

@@ -19,7 +19,7 @@ import {
     TextDocument
 } from 'vscode-languageserver-textdocument';
 import { KEYWORDS } from './keywords';
-import { validateDeclare,validateForLoop, validateWhile, validateAssignment, validateIfElse } from './validators';
+import { validateDeclare, validateForLoop, validateWhile, validateAssignment, validateIfElse } from './validators';
 
 
 
@@ -174,7 +174,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
         if (line.startsWith("function")) {
             closingDiagnostics.push(expectEndKeyword(i, "endfunction"));
         }
-        
+
         // debug for end keywords
         if (line.match("endwhile")) {
             closingDiagnostics.pop();

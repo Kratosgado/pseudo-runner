@@ -137,7 +137,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "build": "npm run build-lang && npm run build-server",
-    "build-server": "tsc -b",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
     "build-lang": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter.exe ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
   },
   "devDependencies": {
@@ -151,12 +151,12 @@
     "eslint": "^8.57.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.2",
+    "vscode-languageclient": "^9.0.1",
+    "vscode-languageserver": "^9.0.1",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "vscode-languageclient": "^9.0.1",
-    "vscode-languageserver": "^9.0.1",
     "vscode-languageserver-textdocument": "^1.0.11"
   }
 }
