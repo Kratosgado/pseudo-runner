@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const serverModule = context.asAbsolutePath(path.join('dist', 'server', 'server.js'));
 	// if the extension is launched in debug mode then the debug server options are used
 	// otherwise the run options are used
+	const debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
 	const serverOptions: ServerOptions = {
 		run: {
 			module: serverModule,
@@ -22,6 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 		debug: {
 			module: serverModule,
 			transport: TransportKind.ipc,
+			options: debugOptions
 		},
 	};
 	const clientOptions: LanguageClientOptions = {

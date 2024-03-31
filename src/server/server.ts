@@ -19,8 +19,8 @@ import {
     TextDocument
 } from 'vscode-languageserver-textdocument';
 import { KEYWORDS } from './keywords';
-import { validateDeclare, validateForLoop, validateWhile } from './validators/declare';
-import { validateAssignment } from './validators/assignment';
+import { validateDeclare,validateForLoop, validateWhile, validateAssignment } from './validators';
+
 
 
 const connection = createConnection(ProposedFeatures.all);

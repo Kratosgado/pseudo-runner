@@ -1,9 +1,9 @@
-import { Diagnostic, DiagnosticSeverity } from "vscode-languageclient/node";
+import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
 
 
 export async function validateWhile(line: string, i: number): Promise<Diagnostic | null> {
     // Check for correct syntax: for <variable><optional = <start>> to <end> <optional<step> <value>> do
-    const match = line.match(/while (\w+)(?:\s*=)? *(?:(\d+))? *do/i);
+    const match = line.match(/while (\w+)(?:\s*(>|<|>=|<=|==))? *(?:(\d+|\w+|[\w+(+|-|*|/)\d+]))? *do/i);
     if (!match) {
         return {
             severity: DiagnosticSeverity.Error,

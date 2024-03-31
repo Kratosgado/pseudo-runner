@@ -1,8 +1,7 @@
-import { validateAssignment } from './assignment';
-import { validateDeclare } from './declare';
+import { validateDeclare, validateForLoop } from './declare';
 import { validateWhile } from './while';
-import { validateForLoop } from './forloop';
+import { validateAssignment } from './assignment';
 
-export default {
-    validateAssignment, validateDeclare, validateWhile, validateForLoop
+export {
+    validateDeclare, validateForLoop, validateWhile, validateAssignment
 };

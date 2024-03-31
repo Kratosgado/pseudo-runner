@@ -1,14 +1,11 @@
 // regex to match variables
-const regVar = /[a-zA-Z][a-zA-Z0-9_]+/;
-const regNum = /\d+/;
-const regOp = /[+/-*]/;
-const regExpr = new RegExp(`(${regVar.source}|${regNum.source})(${regOp.source}(${regVar.source}|${regNum.source}))*`);
+export const regVar = /[a-zA-Z][a-zA-Z0-9_]+/;
+export const regNum = /\d+/;
+// export const regOp = /[+/-*]/;
+// export const regExpr = new RegExp(`(${regVar.source}|${regNum.source})(${regOp.source}(${regVar.source}|${regNum.source}))*`);
+export const regForLoop = new RegExp(`for\\s+${regVar.source}\\s*(=\\s*${regNum.source})?\\s+to\\s+${regNum.source}\\s+(step\\s+${regNum.source})?\\s+do`, 'i');
+export const regDeclare = new RegExp(`declare\\s+(\\w+)\\s+as\\s+(\\w+)`, 'i');
 
-
-export {
-    regExpr, regNum, regOp, regVar,
-    validateIdentifierSyntax,
-};
 
 /**
  * Returns whether the given identifier matches the expected syntax for a valid variable name.

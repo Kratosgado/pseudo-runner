@@ -1,10 +1,16 @@
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
+import { regDeclare, regVar } from "./customRegex";
+
+//  const regOp = /[+\/-*]/;
+// export const regExpr = new RegExp(`(${regVar.source}|${regNum.source})(${regOp.source}(${regVar.source}|${regNum.source}))*`);
+const regForLoop = new RegExp(`for (${regVar.source})(?:\\s*=)? *(?:(\\d+))? *to *(\\d+|[\\w]+)(?:\\s*step\\s*(\\d+))? *do`, 'i');
+
 
 // const EXPRESSION = *(?:(\d+|\w+|[\w+(+|-|*|/)\d+]))
 export async function validateDeclare(line: string, i: number): Promise<Diagnostic | null> {
 
     // Check for correct syntax: declare <variable> as <type>
-    const match = line.toLowerCase().match(/declare\s+(\w+)\s+as\s+(\w+)/i);
+    const match = line.toLowerCase().match(regDeclare);
     if (!match) {
         return {
             severity: DiagnosticSeverity.Error,
@@ -30,42 +36,12 @@ export async function validateDeclare(line: string, i: number): Promise<Diagnost
 }
 
 
-export async function validateWhile(line: string, i: number): Promise<Diagnostic | null> {
-    // Check for correct syntax: for <variable><optional = <start>> to <end> <optional<step> <value>> do
-    const match = line.match(/while (\w+)(?:\s*(>|<|>=|<=|==))? *(?:(\d+|\w+|[\w+(+|-|*|/)\d+]))? *do/i);
-    if (!match) {
-        return {
-            severity: DiagnosticSeverity.Error,
-            range: {
-                start: { line: i, character: 0 },
-                end: { line: i, character: line.length }
-            },
-            message: `Invalid while loop syntax at line ${i + 1}`
-        };
-    }
-    const [__, variableName, startValue, endValue, stepValue] = match;
-
-    // Ensure that the variable name matches the expected syntax for a valid variable name
-    if (!validateIdentifierSyntax(variableName)) {
-        return {
-            severity: DiagnosticSeverity.Error,
-            range: {
-                start: { line: i, character: 0 },
-                end: { line: i, character: variableName.length }
-            },
-            message: `Invalid variable name "${variableName}" at line ${i + 1}`
-        };
-    }
-
-    // Return null if no issues were encountered during validation
-    return null;
-}
-
 
 
 export async function validateForLoop(line: string, i: number): Promise<Diagnostic | null> {
+
     // Check for correct syntax: for <variable><optional = <start>> to <end> <optional<step> <value>> do
-    const match = line.match(/for (\w+)(?:\s*=)? *(?:(\d+))? *to *(\d+|[\w]+)(?:\s*step\s*(\d+))? *do/i);
+    const match = line.match(regForLoop);
     if (!match) {
         return {
             severity: DiagnosticSeverity.Error,
@@ -75,21 +51,22 @@ export async function validateForLoop(line: string, i: number): Promise<Diagnost
             },
             message: `Invalid for loop syntax at line ${i + 1}`
         };
-    }
-    const [__, variableName, startValue, endValue, stepValue] = match;
+    } else {
+        const [__, variableName, startValue, endValue, stepValue] = match;
 
-    // Ensure that the variable name matches the expected syntax for a valid variable name
-    if (!validateIdentifierSyntax(variableName)) {
-        return {
-            severity: DiagnosticSeverity.Error,
-            range: {
-                start: { line: i, character: 0 },
-                end: { line: i, character: variableName.length }
-            },
-            message: `Invalid variable name "${variableName}" at line ${i + 1}`
-        };
-    }
+        // Ensure that the variable name matches the expected syntax for a valid variable name
+        if (!validateIdentifierSyntax(variableName)) {
+            return {
+                severity: DiagnosticSeverity.Error,
+                range: {
+                    start: { line: i, character: 0 },
+                    end: { line: i, character: variableName.length }
+                },
+                message: `Invalid variable name "${variableName}" at line ${i + 1}`
+            };
+        }
 
+    }
     // Return null if no issues were encountered during validation
     return null;
 }
