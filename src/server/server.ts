@@ -19,7 +19,7 @@ import {
     TextDocument
 } from 'vscode-languageserver-textdocument';
 import { KEYWORDS } from './keywords';
-import { validateDeclare,validateForLoop, validateWhile, validateAssignment } from './validators';
+import { validateDeclare,validateForLoop, validateWhile, validateAssignment, validateIfElse } from './validators';
 
 
 
@@ -138,6 +138,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
     const diagnostics: Diagnostic[] = [];
     const closingDiagnostics: Diagnostic[] = [];
     lines.map((line, i) => {
+        line = line.trim().toLowerCase();
         if (line.trim().toLowerCase().startsWith("declare")) {
             validateDeclare(line, i).then((diagnostic) => {
                 if (diagnostic) {
@@ -145,7 +146,15 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
                 }
             });
         }
-        if (line.trim().toLowerCase().match(/[A-Za-z_]+\s+=/)) {
+        if (line.startsWith("if")) {
+            closingDiagnostics.push(expectEndKeyword(i, "endif"));
+            validateIfElse(line, i).then(diagnostic => {
+                if (diagnostic) {
+                    diagnostics.push(diagnostic);
+                }
+            });
+        }
+        if (line.match(/[A-Za-z_]+\s+=/)) {
 
             validateAssignment(line, i).then((diagnostic) => {
                 if (diagnostic) {
@@ -153,7 +162,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
                 }
             });
         }
-        if (line.trim().toLowerCase().startsWith("while")) {
+        if (line.startsWith("while")) {
             // add debugger error for endwhile keyword
             closingDiagnostics.push(expectEndKeyword(i, "endwhile"));
             validateWhile(line, i).then((diagnostic) => {
@@ -164,16 +173,16 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
         }
         
         // debug for end keywords
-        if (line.trim().toLowerCase().match("endwhile")) {
+        if (line.match("endwhile")) {
             closingDiagnostics.pop();
         }
-        if (line.trim().toLowerCase().match("endfor")) {
+        if (line.match("endfor")) {
             closingDiagnostics.pop();
         }
-        if (line.trim().toLowerCase().match("endif")) {
+        if (line.match("endif")) {
             closingDiagnostics.pop();
         }
-        if (line.trim().toLowerCase().startsWith("for")) {
+        if (line.startsWith("for")) {
             // add debugger error for endwhile keyword
             closingDiagnostics.push(expectEndKeyword(i, "endfor"));
             validateForLoop(line, i).then((diagnostic) => {
