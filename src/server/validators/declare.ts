@@ -1,11 +1,6 @@
 import { Diagnostic, DiagnosticSeverity } from "vscode-languageserver/node";
-import { regDeclare, regVar } from "./customRegex";
+import { regDeclare } from "./customRegex";
 
-//  const regOp = /[+\/-*]/;
-// export const regExpr = new RegExp(`(${regVar.source}|${regNum.source})(${regOp.source}(${regVar.source}|${regNum.source}))*`);
-
-
-// const EXPRESSION = *(?:(\d+|\w+|[\w+(+|-|*|/)\d+]))
 export async function validateDeclare(line: string, i: number): Promise<Diagnostic | null> {
 
     // Check for correct syntax: declare <variable> as <type>
