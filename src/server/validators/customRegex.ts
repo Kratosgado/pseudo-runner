@@ -1,4 +1,4 @@
-// regex to match variables
+
 export const regVar = /[a-zA-Z][a-zA-Z0-9_]*/;
 const regNum = /\d+/;
 const regOp = /[+-]/;
