@@ -1,0 +1,27 @@
+{
+    "name": "pseudo-runner-client",
+    "displayName": "pseudo runner client",
+    "description": "Pseudocode langugage support, intellisense and syntax higlighting",
+    "version": "1.3.0",
+    "publisher": "KratosGado",
+    "icon": "images/icon.png",
+    "author": {
+      "name": "Prince Mbeah Essilfie",
+      "email": "mbeahessilfieprince@gmail.com",
+      "url": "https://github.com/Kratosgado"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Kratosgado/pseudo-runner"
+    },
+    "engines": {
+      "vscode": "^1.87.0"
+    },
+    "dependencies": {
+      "vscode-languageclient": "^9.0.1"
+    },
+    "devDependencies": {
+      "@types/vscode": "^1.75.1",
+      "@vscode/test-electron": "^2.3.9"
+    }
+}
