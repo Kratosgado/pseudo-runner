@@ -1,7 +1,7 @@
 
 export const regVar = /[a-zA-Z][a-zA-Z0-9_]*/;
 const regNum = /\d+/;
-const regOp = /[+-]/;
+const regOp = /[+\-*/%]/;
 const regComparision = /(<|>|==|<=|>=)/;
 const regBinary = /(and|or)/i;
 const regExpr = new RegExp(`(${regVar.source}|${regNum.source}) *(${regOp.source} *(${regVar.source}|${regNum.source}))*`);

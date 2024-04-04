@@ -6,7 +6,7 @@ import * as os from 'os';
 // function to run the pseudo code, using the binary
 export const runPseudo = async () => {
     const editor = vscode.window.activeTextEditor;
-    if (editor) {
+    if (editor && editor.document.languageId == "pseudo") {
         const document = editor.document;
         const fileName = document.fileName;
         // check and get a terminal with the name "Pseudo Runner"
