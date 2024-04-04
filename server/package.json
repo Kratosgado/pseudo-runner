@@ -1,10 +1,8 @@
 {
     "name": "pseudo-runner-server",
-    "displayName": "pseudo runner server",
     "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-    "version": "1.3.0",
-    "publisher": "KratosGado",
-    "icon": "images/icon.png",
+    "version": "1.4.0",
+    "license": "MIT",
     "author": {
       "name": "Prince Mbeah Essilfie",
       "email": "mbeahessilfieprince@gmail.com",
