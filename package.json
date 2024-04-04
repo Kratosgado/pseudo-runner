@@ -2,8 +2,9 @@
   "name": "pseudo-runner",
   "displayName": "pseudo runner",
   "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "publisher": "KratosGado",
+	"license": "MIT",
   "icon": "images/icon.png",
   "author": {
     "name": "Prince Mbeah Essilfie",
@@ -35,7 +36,7 @@
     "Formatters"
   ],
   "activationEvents": [],
-  "main": "./dist/extension",
+  "main": "./client/out/extension",
   "contributes": {
     "keybindings": {
       "command": "pseudoRunner.runPseudo",
@@ -67,14 +68,6 @@
         }
       ]
     },
-    "debuggers": [
-      {
-        "type": "pseudo",
-        "label": "Pseudo",
-        "program": "./dist/server",
-        "runtime": "executable"
-      }
-    ],
     "languages": [
       {
         "id": "pseudo",
@@ -91,19 +84,13 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Pseudo Runner",
+      "title": "Pseudo Runner configuration",
       "properties": {
         "pseudoRunner.maxNumberOfProblems": {
           "type": "number",
           "default": 100,
           "scope": "resource",
           "description": "Maximum number of problems to show in the Problems panel."
-        },
-        "pseudoRunner.enable": {
-          "type": "boolean",
-          "scope": "resource",
-          "default": true,
-          "description": "Enable/disable this extension."
         },
         "pseudoRunner.trace.server": {
           "type": "string",
@@ -127,36 +114,21 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "npm run build-server && webpack",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "build": "npm run build-lang && npm run build-server",
-    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-    "build-lang": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter.exe ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
+    "vscode:prepublish": "npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+		"test": "sh ./scripts/e2e.sh",
+    "build-lang-windows": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter.exe ../../typescript/pseudo-runner/dist/pseudo_interpreter.exe && cargo build --release --target=x86_64-unknown-linux-musl  && cp -r target/x86_64-unknown-linux-musl/release/pseudo_interpreter ../../typescript/pseudo-runner/dist/pseudo_interpreter && cd ../../typescript/pseudo-runner"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
-    "@types/node": "~18.19.25",
-    "@types/vscode": "^1.87.0",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "@vscode/test-cli": "^0.0.6",
-    "@vscode/test-electron": "^2.3.9",
-    "eslint": "^8.57.0",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.4.2",
-    "vscode-languageclient": "^9.0.1",
-    "vscode-languageserver": "^9.0.1",
-    "webpack": "^5.90.3",
-    "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "vscode-languageserver-textdocument": "^1.0.11"
-  }
+		"@types/mocha": "^10.0.6",
+		"@types/node": "^18.14.6",
+		"@typescript-eslint/eslint-plugin": "^7.1.0",
+		"@typescript-eslint/parser": "^7.1.0",
+		"eslint": "^8.57.0",
+		"mocha": "^10.3.0",
+		"typescript": "^5.3.3"
+	}
 }
