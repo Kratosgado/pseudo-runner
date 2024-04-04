@@ -9,7 +9,7 @@ const regBoolExpr = new RegExp(`(not )?(${regExpr.source} *${regComparision.sour
 const regMultiBool = new RegExp(`${regBoolExpr.source}( +${regBinary.source} +${regBoolExpr.source})*`);
 
 export const regDeclare = new RegExp(`declare\\s+(${regVar.source})\\s+as\\s+(\\w+)`, 'i');
-export const regForLoop = new RegExp(`for +(${regVar.source}) *(= +(${regExpr.source}))? +to +(${regExpr.source}) +(step +(${regExpr.source}))? +do`, 'i');
+export const regForLoop = new RegExp(`for +(${regVar.source}) *(= +(${regExpr.source}))? +to +(${regExpr.source})( +step +(${regExpr.source}))? +do`, 'i');
 
 export const regIfElse = new RegExp(`if +${regMultiBool.source} +then`, 'i');
 export const regWhile = new RegExp(`while +${regMultiBool.source} +do`, 'i');

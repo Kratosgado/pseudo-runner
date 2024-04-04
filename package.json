@@ -2,7 +2,7 @@
   "name": "pseudo-runner",
   "displayName": "pseudo runner",
   "description": "Pseudocode langugage support, intellisense and syntax higlighting",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "publisher": "KratosGado",
   "license": "MIT",
   "icon": "images/icon.png",
