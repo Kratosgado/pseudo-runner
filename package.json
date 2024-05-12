@@ -1,0 +1,135 @@
+{
+  "name": "pseudo-runner",
+  "displayName": "pseudo runner",
+  "description": "Pseudocode langugage support, intellisense and syntax higlighting",
+  "version": "1.4.1",
+  "publisher": "KratosGado",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "author": {
+    "name": "Prince Mbeah Essilfie",
+    "email": "mbeahessilfieprince@gmail.com",
+    "url": "https://github.com/Kratosgado"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kratosgado/pseudo-runner"
+  },
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "keywords": [
+    "pseudo",
+    "code",
+    "runner",
+    "intellisense",
+    "syntax",
+    "highlighting",
+    "multi-root ready"
+  ],
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Debuggers",
+    "Education",
+    "Other",
+    "Formatters"
+  ],
+  "activationEvents": [],
+  "main": "./client/out/extension",
+  "contributes": {
+    "keybindings": {
+      "command": "pseudoRunner.runPseudo",
+      "title": "run pseudo code",
+      "key": "f5",
+      "when": "editorTextFocus && !editorReadonly || editorLangId == pseudo"
+    },
+    "commands": [
+      {
+        "command": "pseudoRunner.runPseudo",
+        "title": "run pseudo code",
+        "category": "run/execute",
+        "icon": "$(play)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == pseudo",
+          "command": "pseudoRunner.runPseudo",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "when": "editorLangId == pseudo",
+          "command": "pseudoRunner.runPseudo",
+          "group": "navigation"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "pseudo",
+        "extensions": [
+          ".ps",
+          ".pseudo"
+        ],
+        "aliases": [
+          "pseudocode",
+          "pseudo"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Pseudo Runner configuration",
+      "properties": {
+        "pseudoRunner.maxNumberOfProblems": {
+          "type": "number",
+          "default": 100,
+          "scope": "resource",
+          "description": "Maximum number of problems to show in the Problems panel."
+        },
+        "pseudoRunner.trace.server": {
+          "type": "string",
+          "scope": "window",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the pseudo language server."
+        }
+      }
+    },
+    "grammars": [
+      {
+        "language": "pseudo",
+        "scopeName": "text.ps",
+        "path": "./syntaxes/pseudo.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "test": "sh ./scripts/e2e.sh",
+    "build-lang-windows": "cd ../../rust/pseudo_interpreter && cargo build --release  && cp -r target/release/pseudo_interpreter.exe ../../typescript/pseudo-runner/out/pseudo_interpreter.exe && cargo build --release --target=x86_64-unknown-linux-musl  && cp -r target/x86_64-unknown-linux-musl/release/pseudo_interpreter ../../typescript/pseudo-runner/out/pseudo_interpreter && cd ../../typescript/pseudo-runner"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "glob": "^10.3.12",
+    "mocha": "^10.3.0",
+    "typescript": "^5.3.3"
+  }
+}
